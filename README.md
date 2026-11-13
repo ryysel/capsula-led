@@ -45,10 +45,11 @@
 ```sh
 git clone https://github.com/ryysel/capsula-led.git
 cd capsula-led
-./build.sh                     # или взять готовый бинарник
-adb push capsula-led /tmp/
-adb push etc/S98capsula-led /tmp/
-adb shell sh /tmp/install.sh /tmp/capsula-led
+./build.sh                      # или скачать готовый capsula-led из релизов
+adb push capsula-led        /data/local/tmp/capsula-led
+adb push etc/S98capsula-led /data/local/tmp/S98capsula-led
+adb push install.sh         /data/local/tmp/install.sh
+adb shell sh /data/local/tmp/install.sh /data/local/tmp/capsula-led
 ```
 
 Установщик кладёт бинарник и init-скрипт в оверлей
