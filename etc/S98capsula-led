@@ -1,0 +1,38 @@
+#!/bin/sh
+# Custom LED broker for the 2019 Capsule: shows a clock on the ring while
+# voice-agent is idle, yields the ring to stock animations when it is busy.
+
+DAEMON=/usr/bin/capsula-led
+
+is_running() {
+    pgrep -f "$DAEMON daemon" > /dev/null 2>&1
+}
+
+case "$1" in
+  start)
+    if [ ! -x "$DAEMON" ]; then
+        echo "capsula-led: $DAEMON not found"
+        exit 0
+    fi
+    if is_running; then
+        echo "capsula-led: already running"
+        exit 0
+    fi
+    echo "Starting capsula-led..."
+    start-stop-daemon -S -b -x "$DAEMON" -- daemon
+    ;;
+  stop)
+    echo "Stopping capsula-led..."
+    killall -15 capsula-led > /dev/null 2>&1
+    ;;
+  restart)
+    "$0" stop
+    sleep 1
+    "$0" start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+    ;;
+esac
+exit 0
