@@ -120,7 +120,7 @@ logread | grep capsula-led          # переходы clock/stock
 ## Откат
 
 ```sh
-adb shell sh /tmp/uninstall.sh   # остановит демон и уберёт файлы из оверлея
+adb shell sh /data/local/tmp/uninstall.sh   # остановит демон и уберёт файлы из оверлея
 ```
 
 Либо вручную: удалить `/data/overlay/upper/usr/bin/capsula-led`,
